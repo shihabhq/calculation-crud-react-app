@@ -5,7 +5,7 @@ import { useState } from "react";
  * Complete: Handle the operation
  * Complete: Show the results
  * Complete: Put every operation into a history
- * TODO 5: Restore function implementation
+ * Complete: Restore function implementation
  * Complete: Implement Clear history function
  */
 
