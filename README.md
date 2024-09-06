@@ -6,11 +6,12 @@ This is a simple CRUD (Create, Read, Update, Delete) application built using Rea
 
 ## Features
 
-- **Create**: Add new calculations to the history.
-- **Read**: View previously stored calculations.
-- **Update**: Edit any calculation in the history.
-- **Delete**: Remove calculations from the history.
-- **Clear History**: Clear all stored calculations at once.
+- **add**: Add the both input field's numbers.
+- **subtract**: Subtract the both input field's numbers.
+- **multiply**: Multiply the both input field's numbers.
+- **divide**: Divide the both input field's numbers.
+- **modulus**: Get the modulus of the both input field's numbers.
+- **clear history**: Clear all stored calculations at once.
 - **Restore Operations**: Retrieve any deleted calculations or revert to a previous state.
 
 ## Technologies Used
