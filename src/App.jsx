@@ -1,4 +1,8 @@
 import { useState } from "react";
+import idGenerator from "./services/idgenerator";
+import Fields from "./components/statics";
+import InputButtons from "./components/inputbuttons";
+import HistoryList from "./components/historyList";
 
 /**
  * COMPLETE: handle input events
@@ -8,14 +12,6 @@ import { useState } from "react";
  * Complete: Restore function implementation
  * Complete: Implement Clear history function
  */
-
-function* generateId() {
-  let id = 0;
-  while (true) {
-    yield id++;
-  }
-}
-const idGenerator = generateId();
 
 export default function App() {
   const [inputs, setInputs] = useState({ a: 30, b: 20 });
@@ -49,8 +45,8 @@ export default function App() {
         createdAt: new Date().toLocaleTimeString(),
       };
       setHistories([history, ...histories]);
-    }else{
-      alert('invalid operation')
+    } else {
+      alert("invalid operation");
     }
   };
 
@@ -70,68 +66,34 @@ export default function App() {
       setInputs({ a: history.a, b: history.b });
       setResult(history.result);
       setOperatorInPlace(history.operator);
-      setRestoredHistoryId(history.id)
+      setRestoredHistoryId(history.id);
     }
   };
 
   return (
-    <div style={{margin:'2rem 5rem'}}>
-      <div>
-        <h1>Result:{result}</h1>
-        <h3>Operaton: {operatorInPlace}</h3>
-        <p>Inputs</p>
-        <input
-          type="number"
-          name="a"
-          id=""
-          onChange={inputChange}
-          value={inputs.a}
-        />
-        <input
-          type="number"
-          name="b"
-          id=""
-          onChange={inputChange}
-          value={inputs.b}
-        />
-      </div>
-      <div>
-        <p>Operations</p>
-        <button value="+" onClick={() => operation("+")}>
-          +
-        </button>
-        <button value="-" onClick={() => operation("-")}>
-          -
-        </button>
-        <button value="*" onClick={() => operation("*")}>
-          *
-        </button>
-        <button value="/" onClick={() => operation("/")}>
-          /
-        </button>
-        <button value="%" onClick={() => operation("%")}>
-          %
-        </button>
-        <button disabled={histories.length===0} onClick={clearHistory}>clear</button>
-      </div>
+    <div style={{ margin: "2rem 5rem" }}>
+      <Fields
+        inputs={inputs}
+        result={result}
+        inputChange={inputChange}
+        operatorInPlace={operatorInPlace}
+      />
+      <InputButtons
+        operation={operation}
+        histories={histories}
+        clearHistory={clearHistory}
+      />
       <div>
         <h3>History</h3>
         {histories.length > 0 ? (
           <ul>
             {histories.map((history) => {
               return (
-                <>
-                  <li key={history.id} style={{ margin: "1rem" }}>
-                    {`the operation ${history.a} ${history.operator} 
-                  ${history.b} 
-                  results ${history.result}`}{" "}
-                    <br />
-                    <small>created at {history.createdAt}</small>
-                  </li>
-                  <button disabled={history.id === restoredHistoryId} onClick={() => restoreOperation(history.id)}>
-                    restore
-                  </button>
-                </>
+                <HistoryList
+                  history={history} key={history.id.value}
+                  restoreOperation={restoreOperation}
+                  restoredHistoryId={restoredHistoryId}
+                />
               );
             })}
           </ul>
